@@ -60,7 +60,7 @@ services:
         FLYWAY_SCHEMA: "flyway_platform"
         FLYWAY_SCRIPTS_DIR: "postgres"
         SKIP_METASERVICE: "false"
-        METASERVICE_HOST: "metaservice"
+        METASERVICE_HOSTNAME: "metaservice"
         METASERVICE_PORT: "${METASERVICE_SPRING_PORT}"
     env_file: .env
     ports:
