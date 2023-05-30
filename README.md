@@ -55,6 +55,15 @@ Then, build the docker-compose file:
 docker-compose build
 ```
 
+*Note: the Blindata parameters have the following meaning:*
+```yaml
+BLINDATA_URL: the url where Blindata application is reachable
+BLINDATA_USER: the username used to log in Blindata
+BLINDATA_PWD: the password to connect in Blindata
+BLINDATA_TENANT: the UUID of the tenant where you have to operate
+BLINDATA_ROLE: A possible role identifier (UUID). You need this identifier to create or update responsibilities in Blindata
+```
+
 ### Run application
 Run the docker-compose images.
 ```bash
