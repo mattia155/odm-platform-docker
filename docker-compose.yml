@@ -20,27 +20,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Platform Spring Boot app
-  platform:
-    container_name: "odm-platform"
-    depends_on:
-      - PostgreSQL
-    build:
-      context: odm-platform-pp-services/
-      args:
-        SPRING_PROFILES_ACTIVE_BUILD: "dev"
-        SPRING_PROFILES_ACTIVE: "docker"
-        SPRING_PORT: "${PLATFORM_SPRING_PORT}"
-        JAVA_OPTS: ""
-        DATABASE_URL: "jdbc:postgresql://PostgreSQL:${DATABASE_PORT}/${DATABASE_NAME}"
-        DATABASE_USERNAME: "${DATABASE_USERNAME}"
-        DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
-        FLYWAY_SCHEMA: "flyway_platform"
-        FLYWAY_SCRIPTS_DIR: "postgres"
-    env_file: .env
-    ports:
-      - "${PLATFORM_SPRING_PORT}:${PLATFORM_SPRING_PORT}"
-
   # Metaservice Spring Boot app
   metaservice:
     container_name: "odm-metaservice"
@@ -61,6 +40,31 @@ services:
     env_file: .env
     ports:
       - "${METASERVICE_SPRING_PORT}:${METASERVICE_SPRING_PORT}"
+
+  # Platform Spring Boot app
+  platform:
+    container_name: "odm-platform"
+    depends_on:
+      - PostgreSQL
+      - metaservice
+    build:
+      context: odm-platform-pp-services/
+      args:
+        SPRING_PROFILES_ACTIVE_BUILD: "dev"
+        SPRING_PROFILES_ACTIVE: "docker"
+        SPRING_PORT: "${PLATFORM_SPRING_PORT}"
+        JAVA_OPTS: ""
+        DATABASE_URL: "jdbc:postgresql://PostgreSQL:${DATABASE_PORT}/${DATABASE_NAME}"
+        DATABASE_USERNAME: "${DATABASE_USERNAME}"
+        DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
+        FLYWAY_SCHEMA: "flyway_platform"
+        FLYWAY_SCRIPTS_DIR: "postgres"
+        SKIP_METASERVICE: "false"
+        METASERVICE_HOST: "metaservice"
+        METASERVICE_PORT: "${METASERVICE_SPRING_PORT}"
+    env_file: .env
+    ports:
+      - "${PLATFORM_SPRING_PORT}:${PLATFORM_SPRING_PORT}"
 
 volumes:
   postgres:
