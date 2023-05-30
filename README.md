@@ -1,11 +1,16 @@
 # Open Data Mesh: Platform and Meta-service #
 
 Open Data Mesh Platform is a platform that manages the full lifecycle of a data product from deployment to retirement. It use the [Data Product Descriptor Specification](https://dpds.opendatamesh.org/) to to create, deploy and operate data product containers in a mesh architecture. 
+
+
 This repository contains a dockerzied version of:
+
 * the services exposed by the platform product plane
 * the Meta service adapter for [blindata.io](https://blindata.io/)
 
+
 The original projects repositories are:
+
 * [Platform](https://github.com/opendatamesh-initiative/odm-platform-pp-services)
 * [Meta-service](https://github.com/opendatamesh-initiative/odm-platform-up-services-meta-blindata)
 
