@@ -42,6 +42,12 @@ DATABASE_PASSWORD=pwd
 METASERVICE_SPRING_PORT=8595
 
 PLATFORM_SPRING_PORT=8585
+
+BLINDATA_URL=<blindata-url>
+BLINDATA_USER=<blindata-user>
+BLINDATA_PWD=<blindata-pwd>
+BLINDATA_TENANT=<blindata-tenant-uuid>
+BLINDATA_ROLE=<blindata-role-uuid>
 ```
 
 Then, build the docker-compose file:

@@ -37,6 +37,11 @@ services:
         DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
         FLYWAY_SCHEMA: "flyway_metaservice"
         FLYWAY_SCRIPTS_DIR: "postgres"
+        BLINDATA_URL: "${BLINDATA_URL}"
+        BLINDATA_USER: "${BLINDATA_USER}"
+        BLINDATA_PWD: "${BLINDATA_PWD}"
+        BLINDATA_TENANT: "${BLINDATA_TENANT}"
+        BLINDATA_ROLE: "${BLINDATA_ROLE}"
     env_file: .env
     ports:
       - "${METASERVICE_SPRING_PORT}:${METASERVICE_SPRING_PORT}"
