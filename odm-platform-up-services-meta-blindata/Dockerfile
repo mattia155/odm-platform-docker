@@ -48,7 +48,7 @@ ENV BLINDATA_ROLE ${BLINDATA_ROLE}
 RUN mvn clean install -DskipTests
 
 
-# Stage 3: App executable
+# Stage 2: App executable
 FROM openjdk:11-jre-slim
 
 RUN apt-get update && apt-get install -y wget gpg lsb-release zip curl

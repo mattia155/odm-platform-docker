@@ -13,8 +13,6 @@ services:
     env_file: .env
     ports:
       - "${DATABASE_PORT}:${DATABASE_PORT}"
-    #expose:
-    #  - "${DATABASE_PORT}"
     volumes:
       - postgres:/var/lib/postgresql/${DATABASE_NAME}/data:rw
     healthcheck:
@@ -48,6 +46,8 @@ services:
     env_file: .env
     ports:
       - "${METASERVICE_SPRING_PORT}:${METASERVICE_SPRING_PORT}"
+    #extra_hosts:
+    #  - "host.docker.internal:host-gateway"
 
   # Platform Spring Boot app
   platform:
