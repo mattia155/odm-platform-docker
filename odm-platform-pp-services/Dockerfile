@@ -49,8 +49,8 @@ ARG JAVA_OPTS
 ARG DATABASE_URL
 ARG DATABASE_USERNAME
 ARG DATABASE_PASSWORD
-ARG FLYWAY_SCHEMA=flyway_platform
-ARG FLYWAY_SCRIPTS_DIR=postgres
+ARG FLYWAY_SCHEMA=flyway
+ARG FLYWAY_SCRIPTS_DIR=mysql
 ARG H2_CONSOLE_ENABLED=false
 ARG H2_CONSOLE_PATH=h2-console
 ARG SKIP_METASERVICE=true
@@ -70,7 +70,7 @@ ENV SKIP_METASERVICE ${SKIP_METASERVICE}
 ENV METASERVICE_HOSTNAME ${METASERVICE_HOSTNAME}
 ENV METASERVICE_PORT ${METASERVICE_PORT}
 
-COPY --from=build  /workspace/app/odm-platform-pp-services/registry-server/target/odm-platform-pp-*.jar /app/
+COPY --from=build  /workspace/app/odm-platform-pp-services/product-plane-services/registry-server/target/odm-platform-pp-*.jar /app/
 
 RUN ln -s -f /usr/share/zoneinfo/Europe/Rome /etc/localtime
 

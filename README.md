@@ -35,7 +35,7 @@ Build the docker-compose images of the applications and a default PostgreSQL DB.
 Before building it, create a `.env` file in the root directory of the project similar to the following one:
 ```.dotenv
 DATABASE_PORT=5432
-DATABASE_NAME=odmplatformandmetaservicedb
+DATABASE_NAME=odm-demo-db
 DATABASE_USERNAME=usr
 DATABASE_PASSWORD=pwd
 

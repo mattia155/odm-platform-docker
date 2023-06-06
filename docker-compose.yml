@@ -46,8 +46,6 @@ services:
     env_file: .env
     ports:
       - "${METASERVICE_SPRING_PORT}:${METASERVICE_SPRING_PORT}"
-    #extra_hosts:
-    #  - "host.docker.internal:host-gateway"
 
   # Platform Spring Boot app
   platform:
