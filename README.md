@@ -3,16 +3,18 @@
 Open Data Mesh Platform is a platform that manages the full lifecycle of a data product from deployment to retirement. It use the [Data Product Descriptor Specification](https://dpds.opendatamesh.org/) to to create, deploy and operate data product containers in a mesh architecture. 
 
 
-This repository contains a dockerzied version of:
+This repository contains a dockerized version of:
 
 * the services exposed by the platform product plane
 * the Meta service adapter for [blindata.io](https://blindata.io/)
+* the Policy service based on [OPA](https://www.openpolicyagent.org/) 
 
 
 The original projects repositories are:
 
 * [Platform](https://github.com/opendatamesh-initiative/odm-platform-pp-services)
 * [Meta-service](https://github.com/opendatamesh-initiative/odm-platform-up-services-meta-blindata)
+* [Policy service](https://github.com/opendatamesh-initiative/odm-platform-up-services-policy-opa)
 
 # Run Project #
 
@@ -34,20 +36,22 @@ Build the docker-compose images of the applications and a default PostgreSQL DB.
 
 Before building it, create a `.env` file in the root directory of the project similar to the following one:
 ```.dotenv
-DATABASE_PORT=5432
+DATABASE_PORT=5433
 DATABASE_NAME=odm-demo-db
 DATABASE_USERNAME=usr
 DATABASE_PASSWORD=pwd
 
-METASERVICE_SPRING_PORT=8595
-
-PLATFORM_SPRING_PORT=8585
+OPA_PORT=8181
+POLICYSERVICE_SPRING_PORT=4242
 
 BLINDATA_URL=<blindata-url>
 BLINDATA_USER=<blindata-user>
 BLINDATA_PWD=<blindata-pwd>
 BLINDATA_TENANT=<blindata-tenant-uuid>
 BLINDATA_ROLE=<blindata-role-uuid>
+METASERVICE_SPRING_PORT=8595
+
+PLATFORM_SPRING_PORT=8585
 ```
 
 Then, build the docker-compose file:
@@ -94,8 +98,8 @@ You can invoke REST endpoints of the platform module through *OpenAPI UI* availa
 
 * [http://localhost:8585/api/v1/pp/swagger-ui/index.html](http://localhost:8585/api/v1/pp/swagger-ui/index.html)
 
-The Meta-service will be auto invoked from the platform to register the notification events. 
-You can check the notification in the shared PostgreSQL DB.
+The Meta-service and the Policy service will be auto invoked from the platform to register the notification events or handle policies. 
+You can check notifications and policies in the shared PostgreSQL DB.
 
 ## Database
 The application run using a dockerized postgresql running on *localhost* on given port (from *.env* file).

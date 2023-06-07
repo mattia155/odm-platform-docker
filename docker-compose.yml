@@ -21,6 +21,44 @@ services:
       timeout: 5s
       retries: 5
 
+  # OPA Server
+  opa:
+    image: openpolicyagent/opa:latest-rootless
+    env_file: .env
+    ports:
+      - "${OPA_PORT}:${OPA_PORT}"
+    command:
+      - "run"
+      - "--server"
+      - "--log-level=${OPA_LOG_LEVEL}"
+      - "--log-format=json-pretty"
+      - "--set=decision_logs.console=true"
+    volumes:
+      - opa:/var/lib/opa/data:rw
+
+  # Policy service Spring boot app
+  policyservice:
+    depends_on:
+      - opa
+      - PostgreSQL
+    build:
+      context: odm-platform-up-services-policy-opa/
+      args:
+        SPRING_PROFILES_ACTIVE_BUILD: "dev"
+        SPRING_PROFILES_ACTIVE: "docker"
+        JAVA_OPTS: ""
+        DATABASE_URL: "jdbc:postgresql://PostgreSQL:${DATABASE_PORT}/${DATABASE_NAME}"
+        DATABASE_USERNAME: "${DATABASE_USERNAME}"
+        DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
+        FLYWAY_SCHEMA: "flyway_policyservice"
+        FLYWAY_SCRIPTS_DIR: "postgres"
+        SPRING_LOCAL_PORT: "${POLICYSERVICE_SPRING_PORT}"
+        OPA_HOSTNAME: "opa"
+        OPA_PORT: "${OPA_PORT}"
+    env_file: .env
+    ports:
+      - "${POLICYSERVICE_SPRING_PORT}:${POLICYSERVICE_SPRING_PORT}"
+
   # Metaservice Spring Boot app
   metaservice:
     container_name: "odm-metaservice"
@@ -53,6 +91,7 @@ services:
     depends_on:
       - PostgreSQL
       - metaservice
+      - policyservice
     build:
       context: odm-platform-pp-services/
       args:
@@ -68,9 +107,13 @@ services:
         SKIP_METASERVICE: "false"
         METASERVICE_HOSTNAME: "metaservice"
         METASERVICE_PORT: "${METASERVICE_SPRING_PORT}"
+        SKIP_POLICYSERVICE: "true"
+        POLICYSERVICE_HOSTNAME: "policyservice"
+        POLICYSERVICE_PORT: "${POLICYSERVICE_SPRING_PORT}"
     env_file: .env
     ports:
       - "${PLATFORM_SPRING_PORT}:${PLATFORM_SPRING_PORT}"
 
 volumes:
   postgres:
+  opa:
