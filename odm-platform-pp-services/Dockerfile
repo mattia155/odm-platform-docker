@@ -4,7 +4,8 @@ FROM maven:3-openjdk-11-slim as build
 WORKDIR /workspace/app
 
 RUN apt-get update
-RUN apt-get -y install git
+RUN apt-get -y install git npm
+RUN npm i -g redoc-cli
 RUN git clone https://github.com/opendatamesh-initiative/odm-platform-pp-services.git
 
 WORKDIR /workspace/app/odm-platform-pp-services
