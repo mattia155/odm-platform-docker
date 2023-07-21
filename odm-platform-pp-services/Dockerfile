@@ -7,7 +7,7 @@ RUN apt-get update
 RUN apt-get -y install git
 RUN git clone https://github.com/opendatamesh-initiative/odm-platform.git
 
-WORKDIR /workspace/app/odm-platform-pp-services
+WORKDIR /workspace/app/odm-platform
 
 RUN mvn clean install -DskipTests
 
@@ -50,10 +50,10 @@ ENV SKIP_POLICYSERVICE ${SKIP_POLICYSERVICE}
 ENV POLICYSERVICE_HOSTNAME ${POLICYSERVICE_HOSTNAME}
 ENV POLICYSERVICE_PORT ${POLICYSERVICE_PORT}
 
-COPY --from=build /workspace/app/odm-platform-pp-services/platform-core/dpds/target/odm-platform-core-dpds-*.jar /app/
-COPY --from=build /workspace/app/odm-platform-pp-services/product-plane-services/registry-api/target/odm-platform-pp-registry-api-*.jar /app/
-COPY --from=build /workspace/app/odm-platform-pp-services/utility-plane-services/notification-api/target/odm-platform-up-notification-api-*.jar /app/
-COPY --from=build  /workspace/app/odm-platform-pp-services/product-plane-services/registry-server/target/odm-platform-pp-registry-server-*.jar /app/
+COPY --from=build /workspace/app/odm-platform/platform-core/dpds/target/odm-platform-core-dpds-*.jar /app/
+COPY --from=build /workspace/app/odm-platform/product-plane-services/registry-api/target/odm-platform-pp-registry-api-*.jar /app/
+COPY --from=build /workspace/app/odm-platform/utility-plane-services/notification-api/target/odm-platform-up-notification-api-*.jar /app/
+COPY --from=build  /workspace/app/odm-platform/product-plane-services/registry-server/target/odm-platform-pp-registry-server-*.jar /app/
 
 RUN ln -s -f /usr/share/zoneinfo/Europe/Rome /etc/localtime
 
