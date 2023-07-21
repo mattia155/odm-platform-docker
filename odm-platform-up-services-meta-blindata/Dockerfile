@@ -6,9 +6,9 @@ WORKDIR /workspace/app
 # Clone Platform project and build it (the client module is a dependency for this project)
 RUN apt-get update
 RUN apt-get -y install git
-RUN git clone https://github.com/opendatamesh-initiative/odm-platform-pp-services.git
+RUN git clone https://github.com/opendatamesh-initiative/odm-platform.git
 
-WORKDIR /workspace/app/odm-platform-pp-services
+WORKDIR /workspace/app/odm-platform
 
 RUN mvn clean install -DskipTests
 
@@ -31,7 +31,7 @@ ARG JAVA_OPTS
 ARG DATABASE_URL
 ARG DATABASE_USERNAME
 ARG DATABASE_PASSWORD
-ARG FLYWAY_SCHEMA=ODMNOTIFICATION
+ARG DATABASE_SCHEMA=ODMNOTIFICATION
 ARG FLYWAY_SCRIPTS_DIR=postgresql
 ARG H2_CONSOLE_ENABLED=false
 ARG H2_CONSOLE_PATH=h2-console
@@ -46,7 +46,7 @@ ENV JAVA_OPTS ${JAVA_OPTS}
 ENV DATABASE_URL ${DATABASE_URL}
 ENV DATABASE_USERNAME ${DATABASE_USERNAME}
 ENV DATABASE_PASSWORD ${DATABASE_PASSWORD}
-ENV FLYWAY_SCHEMA ${FLYWAY_SCHEMA}
+ENV DATABASE_SCHEMA ${DATABASE_SCHEMA}
 ENV FLYWAY_SCRIPTS_DIR ${FLYWAY_SCRIPTS_DIR}
 ENV H2_CONSOLE_ENABLED ${H2_CONSOLE_ENABLED}
 ENV H2_CONSOLE_PATH ${H2_CONSOLE_PATH}
