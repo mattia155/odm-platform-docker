@@ -5,8 +5,7 @@ WORKDIR /workspace/app
 
 # Clone Platform project and build it (the client module is a dependency for this project)
 RUN apt-get update
-RUN apt-get -y install git npm
-RUN npm i -g redoc-cli
+RUN apt-get -y install git
 RUN git clone https://github.com/opendatamesh-initiative/odm-platform-pp-services.git
 
 WORKDIR /workspace/app/odm-platform-pp-services
@@ -19,7 +18,7 @@ RUN git clone https://github.com/opendatamesh-initiative/odm-platform-up-service
 
 WORKDIR /workspace/app/odm-platform-up-services-meta-blindata
 
-RUN mvn clean package spring-boot:repackage
+RUN mvn clean package spring-boot:repackage -DskipTests
 
 # Stage 2: App executable
 FROM openjdk:11-jre-slim
@@ -32,8 +31,8 @@ ARG JAVA_OPTS
 ARG DATABASE_URL
 ARG DATABASE_USERNAME
 ARG DATABASE_PASSWORD
-ARG FLYWAY_SCHEMA=flyway_metaservice
-ARG FLYWAY_SCRIPTS_DIR=postgres
+ARG FLYWAY_SCHEMA=ODMNOTIFICATION
+ARG FLYWAY_SCRIPTS_DIR=postgresql
 ARG H2_CONSOLE_ENABLED=false
 ARG H2_CONSOLE_PATH=h2-console
 ARG BLINDATA_URL

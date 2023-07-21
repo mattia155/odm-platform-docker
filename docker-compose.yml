@@ -44,14 +44,12 @@ services:
     build:
       context: odm-platform-up-services-policy-opa/
       args:
-        SPRING_PROFILES_ACTIVE_BUILD: "dev"
         SPRING_PROFILES_ACTIVE: "docker"
-        JAVA_OPTS: ""
         DATABASE_URL: "jdbc:postgresql://PostgreSQL:${DATABASE_PORT}/${DATABASE_NAME}"
         DATABASE_USERNAME: "${DATABASE_USERNAME}"
         DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
-        FLYWAY_SCHEMA: "flyway_policyservice"
-        FLYWAY_SCRIPTS_DIR: "postgres"
+        FLYWAY_SCHEMA: "ODMPOLICY"
+        FLYWAY_SCRIPTS_DIR: "postgresql"
         SPRING_LOCAL_PORT: "${POLICYSERVICE_SPRING_PORT}"
         OPA_HOSTNAME: "opa"
         OPA_PORT: "${OPA_PORT}"
@@ -67,15 +65,14 @@ services:
     build:
       context: odm-platform-up-services-meta-blindata/
       args:
-        SPRING_PROFILES_ACTIVE_BUILD: "dev"
         SPRING_PROFILES_ACTIVE: "docker"
         SPRING_PORT: "${METASERVICE_SPRING_PORT}"
         JAVA_OPTS: ""
         DATABASE_URL: "jdbc:postgresql://PostgreSQL:${DATABASE_PORT}/${DATABASE_NAME}"
         DATABASE_USERNAME: "${DATABASE_USERNAME}"
         DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
-        FLYWAY_SCHEMA: "flyway_metaservice"
-        FLYWAY_SCRIPTS_DIR: "postgres"
+        FLYWAY_SCHEMA: "ODMNOTIFICATION"
+        FLYWAY_SCRIPTS_DIR: "postgresql"
         BLINDATA_URL: "${BLINDATA_URL}"
         BLINDATA_USER: "${BLINDATA_USER}"
         BLINDATA_PWD: "${BLINDATA_PWD}"
@@ -95,19 +92,18 @@ services:
     build:
       context: odm-platform-pp-services/
       args:
-        SPRING_PROFILES_ACTIVE_BUILD: "dev"
         SPRING_PROFILES_ACTIVE: "docker"
         SPRING_PORT: "${PLATFORM_SPRING_PORT}"
         JAVA_OPTS: ""
         DATABASE_URL: "jdbc:postgresql://PostgreSQL:${DATABASE_PORT}/${DATABASE_NAME}"
         DATABASE_USERNAME: "${DATABASE_USERNAME}"
         DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
-        FLYWAY_SCHEMA: "flyway_platform"
-        FLYWAY_SCRIPTS_DIR: "postgres"
+        FLYWAY_SCHEMA: "ODMREGISTRY"
+        FLYWAY_SCRIPTS_DIR: "postgresql"
         SKIP_METASERVICE: "false"
         METASERVICE_HOSTNAME: "metaservice"
         METASERVICE_PORT: "${METASERVICE_SPRING_PORT}"
-        SKIP_POLICYSERVICE: "true"
+        SKIP_POLICYSERVICE: "false"
         POLICYSERVICE_HOSTNAME: "policyservice"
         POLICYSERVICE_PORT: "${POLICYSERVICE_SPRING_PORT}"
     env_file: .env
