@@ -5,7 +5,7 @@ WORKDIR /workspace/app
 
 RUN apt-get update
 RUN apt-get -y install git
-RUN git https://github.com/opendatamesh-initiative/odm-platform.git
+RUN git clone https://github.com/opendatamesh-initiative/odm-platform.git
 
 WORKDIR /workspace/app/odm-platform-pp-services
 

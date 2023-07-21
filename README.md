@@ -74,6 +74,18 @@ Run the docker-compose images.
 docker-compose up
 ```
 
+*_NOTE: it's possible to run only a subset of all the available services with the command reported below; but in that scenario you need to be careful of dependencies within modules. Every module require a DB and the policyservice require an OPA server._
+
+```bash
+docker-compose up servicename1 servicename2 ...
+```
+
+_For example, the following command will create only a PostgreSQL DB, an OPA Server and the PolicyService Server_
+
+```bash
+docker-compose up PostgreSQL opa policyservice
+```
+
 ### Stop application
 Stop the docker-compose images
 ```bash
