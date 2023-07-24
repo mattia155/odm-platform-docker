@@ -42,8 +42,8 @@ ENV DATABASE_PASSWORD ${DATABASE_PASSWORD}
 ENV FLYWAY_SCHEMA ${FLYWAY_SCHEMA}
 ENV FLYWAY_SCRIPTS_DIR ${FLYWAY_SCRIPTS_DIR}
 ENV OPA_HOSTNAME ${OPA_HOSTNAME}
-ENV OPA_LOCAL_PORT ${OPA_PORT}
-ENV SPRING_LOCAL_PORT ${SPRING_PORT}
+ENV OPA_PORT ${OPA_PORT}
+ENV SPRING_PORT ${SPRING_PORT}
 
 COPY --from=build  /workspace/app/odm-platform-up-services-policy-opa/opa-client/target/odm-platform-up-policy-opa-client-*.jar /app/
 COPY --from=build  /workspace/app/odm-platform-up-services-policy-opa/opa-policy-server/target/odm-platform-up-policy-opa-server-*.jar /app/

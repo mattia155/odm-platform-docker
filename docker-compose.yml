@@ -50,7 +50,7 @@ services:
         DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
         FLYWAY_SCHEMA: "ODMPOLICY"
         FLYWAY_SCRIPTS_DIR: "postgresql"
-        SPRING_LOCAL_PORT: "${POLICYSERVICE_SPRING_PORT}"
+        SPRING_PORT: "${POLICYSERVICE_SPRING_PORT}"
         OPA_HOSTNAME: "opa"
         OPA_PORT: "${OPA_PORT}"
     env_file: .env
@@ -67,7 +67,6 @@ services:
       args:
         SPRING_PROFILES_ACTIVE: "docker"
         SPRING_PORT: "${METASERVICE_SPRING_PORT}"
-        JAVA_OPTS: ""
         DATABASE_URL: "jdbc:postgresql://PostgreSQL:${DATABASE_PORT}/${DATABASE_NAME}"
         DATABASE_USERNAME: "${DATABASE_USERNAME}"
         DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
