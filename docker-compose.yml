@@ -30,7 +30,7 @@ services:
     command:
       - "run"
       - "--server"
-      - "--log-level=${OPA_LOG_LEVEL}"
+      - "--log-level=debug"
       - "--log-format=json-pretty"
       - "--set=decision_logs.console=true"
     volumes:
