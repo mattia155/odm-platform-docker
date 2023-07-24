@@ -43,7 +43,7 @@ DATABASE_PASSWORD=pwd
 
 SKIP_POLICYSERVICE=false
 OPA_PORT=8181
-POLICYSERVICE_SPRING_PORT=4242
+POLICYSERVICE_SPRING_PORT=9001
 
 SKIP_METASERVICE=false
 BLINDATA_URL=<blindata-url>
@@ -51,9 +51,9 @@ BLINDATA_USER=<blindata-user>
 BLINDATA_PWD=<blindata-pwd>
 BLINDATA_TENANT=<blindata-tenant-uuid>
 BLINDATA_ROLE=<blindata-role-uuid>
-METASERVICE_SPRING_PORT=8595
+METASERVICE_SPRING_PORT=9002
 
-PLATFORM_SPRING_PORT=8585
+PLATFORM_SPRING_PORT=8001
 ```
 
 Then, build the docker-compose file:
@@ -110,7 +110,7 @@ docker-compose build --no-cache
 
 You can invoke REST endpoints of the platform module through *OpenAPI UI* available at the following url:
 
-* [http://localhost:8585/api/v1/pp/swagger-ui/index.html](http://localhost:8585/api/v1/pp/swagger-ui/index.html)
+* [http://localhost:8001/api/v1/pp/swagger-ui/index.html](http://localhost:8001/api/v1/pp/swagger-ui/index.html)
 
 The Meta-service and the Policy service will be auto invoked from the platform to register the notification events or handle policies. 
 You can check notifications and policies in the shared PostgreSQL DB.

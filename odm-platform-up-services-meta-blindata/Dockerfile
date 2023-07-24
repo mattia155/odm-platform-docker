@@ -26,7 +26,7 @@ FROM openjdk:11-jre-slim
 RUN apt-get update && apt-get install -y wget gpg lsb-release zip curl
 
 ARG SPRING_PROFILES_ACTIVE=docker
-ARG SPRING_PORT=8595
+ARG SPRING_PORT=9002
 ARG JAVA_OPTS
 ARG DATABASE_URL
 ARG DATABASE_USERNAME
