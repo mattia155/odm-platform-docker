@@ -89,7 +89,7 @@ services:
       - metaservice
       - policyservice
     build:
-      context: odm-platform-pp-services/
+      context: odm-platform/
       args:
         SPRING_PROFILES_ACTIVE: "docker"
         SPRING_PORT: "${PLATFORM_SPRING_PORT}"
