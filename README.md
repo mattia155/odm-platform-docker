@@ -27,8 +27,8 @@ The original projects repositories are:
 Clone the repository and move it to the project root folder
 
 ```bash
-git clone https://bitbucket.org/quantyca/odm-platform-and-metaservice-docker/src/master/
-cd odm-platform-and-metaservice-docker
+git clone https://github.com/opendatamesh-initiative/odm-platform-docker.git
+cd odm-platform-docker
 ```
 
 ### Build image
